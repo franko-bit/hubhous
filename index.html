@@ -21,7 +21,9 @@
   </nav>
 
   <section class="fade-up" style="height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; background: #000;">
-    <iframe src="https://mega.nz/embed/IkpRTbRQ#YG2gY9d4-WJClCl2TQlXyP8dH0HeLvf1i4VNh75EX6E" title="HubHome architecture video" allow="autoplay; fullscreen" style="position: absolute; inset: 0; width: 100%; height: 100%; border: 0; object-fit: cover; filter: brightness(0.62) contrast(1.08);"></iframe>
+    <video autoplay muted loop playsinline style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.62) contrast(1.08);">
+      <source src="https://res.cloudinary.com/franklinrw/video/upload/v1788944552/short_denpzx.mp4" type="video/mp4">
+    </video>
     <div style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(17,17,17,0.52), rgba(17,17,17,0.18));"></div>
     <div style="position: relative; z-index: 2; text-align: center; max-width: 800px; padding: 0 2rem; opacity: 0; animation: fadeInUp 1s ease-out 0.3s forwards;">
       <div style="font-size: 14px; letter-spacing: 2px; color: #f0d8b5; margin-bottom: 1rem; font-weight: 500; text-transform: uppercase;">Luxury Architecture</div>
@@ -62,7 +64,7 @@
     <div class="video-showcase-shell" style="max-width: 1400px; margin: 0 auto; display: flex; align-items: stretch; gap: 1.25rem; min-height: 520px;">
       <div class="showcase-side prev-side" style="flex: 0 0 20%; min-width: 180px; cursor: pointer;">
         <div class="showcase-video-wrap side-video" style="height: 100%; background: #111; position: relative; overflow: hidden; border-radius: 0;">
-          <iframe class="showcase-video" id="prevVideo" title="Previous HubHome video" allow="autoplay; fullscreen"></iframe>
+          <video class="showcase-video" id="prevVideo" muted loop playsinline preload="metadata"></video>
           <div class="video-overlay" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.35));"></div>
           <div class="video-label" style="position: absolute; left: 1rem; right: 1rem; bottom: 1rem; z-index: 2; color: white;">
             <div class="video-title" style="font-size: 14px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600; margin-bottom: 0.4rem;">Previous</div>
@@ -72,7 +74,7 @@
       </div>
 
       <div class="showcase-main" style="flex: 0 0 60%; min-width: 0; cursor: pointer; background: #111; position: relative; overflow: hidden; border-radius: 0;">
-        <iframe id="currentVideo" class="showcase-video" title="Current HubHome video" allow="autoplay; fullscreen" style="width: 100%; height: 100%; border: 0; object-fit: cover; display: block; background: #000;"></iframe>
+        <video id="currentVideo" class="showcase-video" muted autoplay loop playsinline preload="metadata" style="width: 100%; height: 100%; object-fit: cover; display: block; background: #000;"></video>
         <div class="video-overlay" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.18));"></div>
         <div class="video-meta" style="position: absolute; left: 1.5rem; right: 1.5rem; bottom: 1.25rem; z-index: 2; display: flex; justify-content: space-between; align-items: end; gap: 1rem; color: white;">
           <div>
@@ -85,7 +87,7 @@
 
       <div class="showcase-side next-side" style="flex: 0 0 20%; min-width: 180px; cursor: pointer;">
         <div class="showcase-video-wrap side-video" style="height: 100%; background: #111; position: relative; overflow: hidden; border-radius: 0;">
-          <iframe class="showcase-video" id="nextVideo" title="Next HubHome video" allow="autoplay; fullscreen"></iframe>
+          <video class="showcase-video" id="nextVideo" muted loop playsinline preload="metadata"></video>
           <div class="video-overlay" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.35));"></div>
           <div class="video-label" style="position: absolute; left: 1rem; right: 1rem; bottom: 1rem; z-index: 2; color: white;">
             <div class="video-title" style="font-size: 14px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600; margin-bottom: 0.4rem;">Next</div>
@@ -1497,11 +1499,11 @@
 
     // ---- Video showcase with IMPROVED animations and continuous playback ----
     const showcaseVideos = [
-      { title: 'Architectural Walkthrough', subtitle: 'Project Overview', src: 'https://mega.nz/embed/IkpRTbRQ#YG2gY9d4-WJClCl2TQlXyP8dH0HeLvf1i4VNh75EX6E' },
-      { title: 'Interior Design Tour', subtitle: 'Design Details', src: 'https://mega.nz/embed/IkpRTbRQ#YG2gY9d4-WJClCl2TQlXyP8dH0HeLvf1i4VNh75EX6E' },
-      { title: 'Lighting & Ambiance', subtitle: 'Mood & Atmosphere', src: 'https://mega.nz/embed/IkpRTbRQ#YG2gY9d4-WJClCl2TQlXyP8dH0HeLvf1i4VNh75EX6E' },
-      { title: 'Behind the Scenes', subtitle: 'Construction Process', src: 'https://mega.nz/embed/IkpRTbRQ#YG2gY9d4-WJClCl2TQlXyP8dH0HeLvf1i4VNh75EX6E' },
-      { title: 'Final Presentation', subtitle: 'Project Completion', src: 'https://mega.nz/embed/IkpRTbRQ#YG2gY9d4-WJClCl2TQlXyP8dH0HeLvf1i4VNh75EX6E' }
+      { title: 'Architectural Walkthrough', subtitle: 'Project Overview', src: 'https://res.cloudinary.com/franklinrw/video/upload/v1788944552/short_denpzx.mp4' },
+      { title: 'Interior Design Tour', subtitle: 'Design Details', src: 'https://res.cloudinary.com/franklinrw/video/upload/v1788944552/short_denpzx.mp4' },
+      { title: 'Lighting & Ambiance', subtitle: 'Mood & Atmosphere', src: 'https://res.cloudinary.com/franklinrw/video/upload/v1788944552/short_denpzx.mp4' },
+      { title: 'Behind the Scenes', subtitle: 'Construction Process', src: 'https://res.cloudinary.com/franklinrw/video/upload/v1788944552/short_denpzx.mp4' },
+      { title: 'Final Presentation', subtitle: 'Project Completion', src: 'https://res.cloudinary.com/franklinrw/video/upload/v1788944552/short_denpzx.mp4' }
     ];
 
     let currentVideoIndex = 0;
@@ -1558,7 +1560,7 @@
             <h2 style="color: white; font-size: 24px; margin: 0; font-weight: 300;">${video.title}</h2>
           </div>
           <div style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 1rem 1rem 1.5rem; animation: scaleIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s backwards;">
-            <iframe title="${video.title}" allow="autoplay; fullscreen" style="width: 100%; max-width: 1000px; height: 100%; max-height: 100%; background: #000; border: 0; border-radius: 4px;" src="${video.src}"></iframe>
+            <video controls autoplay playsinline style="width: 100%; max-width: 1000px; height: 100%; max-height: 100%; background: #000; object-fit: contain; border-radius: 4px;" src="${video.src}"></video>
           </div>
         </div>
       `;
