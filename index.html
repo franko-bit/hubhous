@@ -21,9 +21,7 @@
   </nav>
 
   <section class="fade-up" style="height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; background: #000;">
-    <video autoplay muted loop playsinline style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.62) contrast(1.08);">
-      <source src="short.mp4" type="video/mp4">
-    </video>
+    <iframe src="https://www.youtube.com/embed/7Q-9qlKG4go?autoplay=1&mute=1&loop=1&playlist=7Q-9qlKG4go&controls=0&rel=0&modestbranding=1" title="HubHome luxury architecture video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen style="position: absolute; inset: 0; width: 100%; height: 100%; border: 0; object-fit: cover; pointer-events: none; transform: scale(1.08); filter: brightness(0.62) contrast(1.08);"></iframe>
     <div style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(17,17,17,0.52), rgba(17,17,17,0.18));"></div>
     <div style="position: relative; z-index: 2; text-align: center; max-width: 800px; padding: 0 2rem; opacity: 0; animation: fadeInUp 1s ease-out 0.3s forwards;">
       <div style="font-size: 14px; letter-spacing: 2px; color: #f0d8b5; margin-bottom: 1rem; font-weight: 500; text-transform: uppercase;">Luxury Architecture</div>
@@ -64,7 +62,7 @@
     <div class="video-showcase-shell" style="max-width: 1400px; margin: 0 auto; display: flex; align-items: stretch; gap: 1.25rem; min-height: 520px;">
       <div class="showcase-side prev-side" style="flex: 0 0 20%; min-width: 180px; cursor: pointer;">
         <div class="showcase-video-wrap side-video" style="height: 100%; background: #111; position: relative; overflow: hidden; border-radius: 0;">
-          <video class="showcase-video" id="prevVideo" muted loop playsinline preload="metadata"></video>
+          <iframe class="showcase-video" id="prevVideo" title="Previous HubHome video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
           <div class="video-overlay" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.35));"></div>
           <div class="video-label" style="position: absolute; left: 1rem; right: 1rem; bottom: 1rem; z-index: 2; color: white;">
             <div class="video-title" style="font-size: 14px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600; margin-bottom: 0.4rem;">Previous</div>
@@ -74,7 +72,7 @@
       </div>
 
       <div class="showcase-main" style="flex: 0 0 60%; min-width: 0; cursor: pointer; background: #111; position: relative; overflow: hidden; border-radius: 0;">
-        <video id="currentVideo" class="showcase-video" muted autoplay loop playsinline preload="metadata" style="width: 100%; height: 100%; object-fit: cover; display: block; background: #000;"></video>
+        <iframe id="currentVideo" class="showcase-video" title="Current HubHome video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen style="width: 100%; height: 100%; object-fit: cover; display: block; background: #000; border: 0;"></iframe>
         <div class="video-overlay" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.18));"></div>
         <div class="video-meta" style="position: absolute; left: 1.5rem; right: 1.5rem; bottom: 1.25rem; z-index: 2; display: flex; justify-content: space-between; align-items: end; gap: 1rem; color: white;">
           <div>
@@ -87,7 +85,7 @@
 
       <div class="showcase-side next-side" style="flex: 0 0 20%; min-width: 180px; cursor: pointer;">
         <div class="showcase-video-wrap side-video" style="height: 100%; background: #111; position: relative; overflow: hidden; border-radius: 0;">
-          <video class="showcase-video" id="nextVideo" muted loop playsinline preload="metadata"></video>
+          <iframe class="showcase-video" id="nextVideo" title="Next HubHome video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
           <div class="video-overlay" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.35));"></div>
           <div class="video-label" style="position: absolute; left: 1rem; right: 1rem; bottom: 1rem; z-index: 2; color: white;">
             <div class="video-title" style="font-size: 14px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600; margin-bottom: 0.4rem;">Next</div>
@@ -1499,12 +1497,16 @@
 
     // ---- Video showcase with IMPROVED animations and continuous playback ----
     const showcaseVideos = [
-      { title: 'Architectural Walkthrough', subtitle: 'Project Overview', src: 'short.mp4' },
-      { title: 'Interior Design Tour', subtitle: 'Design Details', src: 'short.mp4' },
-      { title: 'Lighting & Ambiance', subtitle: 'Mood & Atmosphere', src: 'short.mp4' },
-      { title: 'Behind the Scenes', subtitle: 'Construction Process', src: 'short.mp4' },
-      { title: 'Final Presentation', subtitle: 'Project Completion', src: 'short.mp4' }
+      { title: 'Architectural Walkthrough', subtitle: 'Project Overview' },
+      { title: 'Interior Design Tour', subtitle: 'Design Details' },
+      { title: 'Lighting & Ambiance', subtitle: 'Mood & Atmosphere' },
+      { title: 'Behind the Scenes', subtitle: 'Construction Process' },
+      { title: 'Final Presentation', subtitle: 'Project Completion' }
     ];
+
+    const youtubeVideoId = '7Q-9qlKG4go';
+    const youtubeShowcaseUrl = `https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&mute=1&loop=1&playlist=${youtubeVideoId}&controls=0&rel=0&modestbranding=1`;
+    const youtubeModalUrl = `https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&rel=0&modestbranding=1`;
 
     let currentVideoIndex = 0;
     const mainVideo = document.getElementById('currentVideo');
@@ -1516,14 +1518,6 @@
     const lightboxContent = document.getElementById('lightboxContent');
     const closeLightbox = document.getElementById('closeLightbox');
     const videoShowcaseShell = document.querySelector('.video-showcase-shell');
-
-    function ensureVideoSource(videoElement, videoData) {
-      if (!videoElement.src.endsWith(videoData.src)) {
-        videoElement.src = videoData.src;
-        videoElement.load();
-      }
-      videoElement.play().catch(() => {});
-    }
 
     function updateShowcase() {
       const prevIndex = (currentVideoIndex - 1 + showcaseVideos.length) % showcaseVideos.length;
@@ -1541,9 +1535,9 @@
         const prev = showcaseVideos[prevIndex];
         const next = showcaseVideos[nextIndex];
 
-        ensureVideoSource(mainVideo, current);
-        ensureVideoSource(prevVideo, prev);
-        ensureVideoSource(nextVideo, next);
+        if (mainVideo.src !== youtubeShowcaseUrl) mainVideo.src = youtubeShowcaseUrl;
+        if (prevVideo.src !== youtubeShowcaseUrl) prevVideo.src = youtubeShowcaseUrl;
+        if (nextVideo.src !== youtubeShowcaseUrl) nextVideo.src = youtubeShowcaseUrl;
         currentVideoTitle.textContent = current.title;
         currentVideoSubtitle.textContent = current.subtitle;
         prevVideo.parentElement.querySelector('.video-subtitle').textContent = prev.title;
@@ -1564,7 +1558,7 @@
             <h2 style="color: white; font-size: 24px; margin: 0; font-weight: 300;">${video.title}</h2>
           </div>
           <div style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 1rem 1rem 1.5rem; animation: scaleIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s backwards;">
-            <video controls autoplay playsinline style="width: 100%; max-width: 1000px; height: 100%; max-height: 100%; background: #000; object-fit: contain; border-radius: 4px;" src="${video.src}"></video>
+            <iframe title="HubHome luxury architecture video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen style="width: 100%; max-width: 1000px; height: 100%; max-height: 100%; background: #000; border: 0; border-radius: 4px;" src="${youtubeModalUrl}"></iframe>
           </div>
         </div>
       `;
