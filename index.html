@@ -1039,14 +1039,16 @@
       grid-template-columns: 1.35fr 0.95fr;
       width: 100%;
       height: 100%;
+      max-height: 100%;
+      overflow-y: auto;
+      overflow-x: hidden;
       background: #111111;
       color: white;
     }
 
     .gallery-modal-media {
       position: relative;
-      overflow-y: auto;
-      overflow-x: hidden;
+      overflow: hidden;
       min-height: 300px;
       background: #000;
       border-radius: 0;
