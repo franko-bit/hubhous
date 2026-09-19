@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="hubhome-api-url" content="">
   <title>HubHome | Real-Estate Photography</title>
   <style>
     html, body {
@@ -264,7 +265,7 @@
         <button id="bookingChatSend" type="button" aria-label="Send message">&#8594;</button>
       </div>
       <button id="bookingWhatsAppButton" class="booking-whatsapp-button" type="button" disabled>Send conversation to WhatsApp &#8594;</button>
-      <p id="bookingChatMode" class="booking-chat-note">AI concierge online. When the details are ready, send the conversation to WhatsApp.</p>
+      <p id="bookingChatMode" class="booking-chat-note">Connecting to the HUBHOME AI concierge...</p>
     </div>
   </section>
 
@@ -2175,6 +2176,8 @@
     const bookingChatMode = document.getElementById('bookingChatMode');
     const bookingSessionId = `hubhome-photo-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
     const bookingTranscript = [];
+    const configuredApiUrl = document.querySelector('meta[name="hubhome-api-url"]')?.content.trim() || window.HUBHOME_API_URL || '';
+    const chatApiUrl = configuredApiUrl ? `${configuredApiUrl.replace(/\/$/, '')}/api/chat` : '/api/chat';
 
     function setBookingChatOpen(isOpen) {
       bookingChat.classList.toggle('open', isOpen);
@@ -2210,8 +2213,9 @@
       const loadingMessage = addBookingMessage('Thinking...', 'assistant loading');
       let assistantMessage = '';
       try {
-        const response = await fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message, sessionId: bookingSessionId, product: 'HubHome visit booking', customerName: 'Website visitor', assistantType: 'hubhome_booking' }) });
-        if (!response.ok) throw new Error(`Assistant error: ${response.status}`);
+        const response = await fetch(chatApiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message, sessionId: bookingSessionId, product: 'HubHome visit booking', customerName: 'Website visitor', assistantType: 'hubhome_booking' }) });
+        if (!response.ok) throw new Error(`Booking API returned HTTP ${response.status}`);
+        if (!response.body) throw new Error('Booking API returned no response stream');
         const reader = response.body.getReader();
         const decoder = new TextDecoder();
         let buffer = '';
@@ -2238,7 +2242,8 @@
         bookingTranscript.push(`Photographer assistant: ${assistantMessage}`);
         bookingWhatsAppButton.disabled = false;
       } catch (error) {
-        loadingMessage.textContent = `Connection error: ${error.message}`;
+        loadingMessage.textContent = `Booking API unavailable: ${error.message}. Check the API URL and server.`;
+        bookingChatMode.textContent = 'Booking API unavailable. Set the HUBHOME API URL for this hosted page.';
         loadingMessage.classList.remove('loading');
       } finally {
         bookingChatSend.disabled = false;
