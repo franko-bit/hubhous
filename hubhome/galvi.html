@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery | HubHome</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+    }
+
+    body {
+      background: #121212;
+      color: #f1ece4;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      overflow-x: hidden;
+    }
+
+    .page-loader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: grid;
+      place-items: center;
+      background: #121212;
+      transition: opacity 0.7s ease, visibility 0.7s ease;
+    }
+
+    .page-loader.is-hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .loader-mark {
+      display: grid;
+      gap: 1rem;
+      justify-items: center;
+      color: #d6a56d;
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+    }
+
+    .loader-ring {
+      width: 48px;
+      height: 48px;
+      border: 1px solid rgba(214,165,109,0.25);
+      border-top-color: #d6a56d;
+      border-radius: 50%;
+      animation: loaderSpin 1.1s linear infinite;
+    }
+
+    @keyframes loaderSpin { to { transform: rotate(360deg); } }
+
+    .main-image-wrapper.is-loading::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(18,18,18,0.45);
+      animation: imagePulse 1.2s ease-in-out infinite alternate;
+    }
+
+    @keyframes imagePulse { from { opacity: 0.35; } to { opacity: 0.8; } }
+
+    .gallery-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 2rem 4rem;
+    }
+
+    .main-view {
+      animation: fadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      display: flex;
+      justify-content: center;
+    }
+
+    /* ---- Reduced-width landscape main image (no bottom margin) ---- */
+    .main-image-wrapper {
+      width: 100%;
+      max-width: 900px;
+      aspect-ratio: 16 / 9;
+      margin: 0 auto;
+      background: #000;
+      border-radius: 2px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .main-image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .main-image-wrapper:hover img {
+      transform: scale(1.02);
+    }
+
+    /* ---- Thumbnails section: centered under the main image ---- */
+    .thumbnails-section {
+      animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s backwards;
+      margin: 0;
+      display: flex;
+      justify-content: center;   /* centers the whole grid */
+    }
+
+    .thumbnails-grid {
+      display: flex;
+      gap: 2px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-behavior: smooth;
+      padding: 0;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(214, 165, 109, 0.3) transparent;
+      max-width: 100%;
+    }
+
+    .thumbnails-grid::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    .thumbnails-grid::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .thumbnails-grid::-webkit-scrollbar-thumb {
+      background: rgba(214, 165, 109, 0.3);
+      border-radius: 2px;
+    }
+
+    .thumbnails-grid::-webkit-scrollbar-thumb:hover {
+      background: rgba(214, 165, 109, 0.5);
+    }
+
+    .thumbnail {
+      min-width: 100px;
+      width: 100px;
+      height: 100px;
+      flex-shrink: 0;
+      overflow: hidden;
+      border-radius: 2px;
+      cursor: pointer;
+      background: #1a1a1a;
+      border: 2px solid transparent;
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: relative;
+    }
+
+    .thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .thumbnail:hover {
+      transform: scale(1.05);
+      border-color: rgba(214, 165, 109, 0.5);
+    }
+
+    .thumbnail.active {
+      border-color: #d6a56d;
+      box-shadow: 0 0 0 3px rgba(214, 165, 109, 0.2);
+    }
+
+    .thumbnail:hover img {
+      transform: scale(1.08);
+    }
+
+    .gallery-topbar {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #f1ece4;
+      background: transparent;
+      border: 1px solid rgba(214, 165, 109, 0.6);
+      padding: 0.75rem 1rem;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .back-button:hover {
+      color: #121212;
+      background: #d6a56d;
+      border-color: #d6a56d;
+    }
+
+    .back-button .back-icon {
+      font-size: 16px;
+      line-height: 1;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .gallery-container {
+        padding: 1.5rem 1.25rem 3rem;
+      }
+
+      .main-image-wrapper {
+        max-width: 100%;
+        aspect-ratio: 4 / 3;
+      }
+
+      .thumbnail {
+        min-width: 90px;
+        width: 90px;
+        height: 90px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .gallery-container {
+        padding: 1rem 1rem 2.5rem;
+      }
+
+      .main-image-wrapper {
+        aspect-ratio: 4 / 3;
+      }
+
+      .thumbnail {
+        min-width: 80px;
+        width: 80px;
+        height: 80px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-loader" id="pageLoader" aria-label="Loading gallery">
+    <div class="loader-mark"><span class="loader-ring" aria-hidden="true"></span><span>HubHome</span></div>
+  </div>
+  <div class="gallery-container">
+    <div class="gallery-topbar">
+      <a class="back-button" href="index.html" aria-label="Back to home">
+        <span class="back-icon">←</span>
+        <span class="back-text">Back</span>
+      </a>
+    </div>
+
+    <div class="main-view">
+      <div class="main-image-wrapper">
+        <img id="mainImage" src="" alt="Gallery image" />
+      </div>
+    </div>
+
+    <div class="thumbnails-section">
+      <div class="thumbnails-grid" id="thumbnailsGrid"></div>
+    </div>
+  </div>
+
+  <script>
+    // Keep the full gallery image list in sync with index.html so the selected
+    // image clicked on the homepage can be opened in galvi.html as the main image.
+    const galleryImages = [
+      { image: 'https://res.cloudinary.com/dzgd4r0oz/image/upload/w_1600,q_auto,f_auto/v1789454840/hubhom/DSC01343_srjilo.jpg', title: 'Image 1' },
+      { image: 'https://res.cloudinary.com/dzgd4r0oz/image/upload/w_1600,q_auto,f_auto/v1789454839/hubhom/DSC01355_ep7v4c.jpg', title: 'Image 2' },
+      { image: 'https://res.cloudinary.com/dzgd4r0oz/image/upload/w_1600,q_auto,f_auto/v1789454835/hubhom/QUICK_photo_11_m6kshf.jpg', title: 'Image 3' },
+      { image: 'https://res.cloudinary.com/dzgd4r0oz/image/upload/w_1600,q_auto,f_auto/v1789454828/hubhom/QUICK_photo_24_fxf2ra.jpg', title: 'Image 4' },
+      { image: 'https://res.cloudinary.com/dzgd4r0oz/image/upload/w_1600,q_auto,f_auto/v1789454736/hubhom/4-13_d99ura.jpg', title: 'Image 5' },
+      { image: 'https://res.cloudinary.com/dzgd4r0oz/image/upload/w_1600,q_auto,f_auto/v1789454735/hubhom/4_tb03dp.jpg', title: 'Image 6' },
+      { image: 'https://res.cloudinary.com/dzgd4r0oz/image/upload/w_1600,q_auto,f_auto/v1789454721/hubhom/hubdivin__1_y8zqcd.jpg', title: 'Image 7' },
+      { image: 'https://res.cloudinary.com/dzgd4r0oz/image/upload/w_1600,q_auto,f_auto/v1789454705/hubhom/DSC02568NIGHT_uerrmh.jpg', title: 'Image 8' },
+      { image: 'https://res.cloudinary.com/dzgd4r0oz/image/upload/w_1600,q_auto,f_auto/v1789454625/hubhom/quick_photo3_t0bhyo.jpg', title: 'Image 9' },
+      { image: 'https://res.cloudinary.com/dzgd4r0oz/image/upload/w_1600,q_auto,f_auto/v1789454593/hubhom/QUICK_photo_27_xgmn5n.jpg', title: 'Image 10' },
+      { image: 'https://res.cloudinary.com/dzgd4r0oz/image/upload/w_1600,q_auto,f_auto/v1789454033/hubhom/quick_photo_34_d2b56r.jpg', title: 'Image 11' },
+      { image: 'https://res.cloudinary.com/dzgd4r0oz/image/upload/w_1600,q_auto,f_auto/v1789454026/hubhom/quick_photo_3_dtbbi7.jpg', title: 'Image 12' }
+    ];
+
+    const mainImage = document.getElementById('mainImage');
+    const pageLoader = document.getElementById('pageLoader');
+    const mainImageWrapper = document.querySelector('.main-image-wrapper');
+    const thumbnailsGrid = document.getElementById('thumbnailsGrid');
+
+    const urlParams = new URLSearchParams(window.location.search);
+    let currentIndex = parseInt(urlParams.get('image')) || 0;
+
+    if (currentIndex < 0 || currentIndex >= galleryImages.length) currentIndex = 0;
+
+    function updateMainImage(index) {
+      currentIndex = index;
+      const img = galleryImages[index];
+      mainImageWrapper.classList.add('is-loading');
+      mainImage.src = img.image;
+
+      document.querySelectorAll('.thumbnail').forEach((thumb, i) => {
+        thumb.classList.toggle('active', i % galleryImages.length === index);
+      });
+
+      // No scrollIntoView here — keeps the carousel centered
+      window.history.replaceState(null, '', `?image=${index}`);
+    }
+
+    mainImage.addEventListener('load', () => {
+      mainImageWrapper.classList.remove('is-loading');
+      pageLoader.classList.add('is-hidden');
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => pageLoader.classList.add('is-hidden'), 700);
+    }, { once: true });
+    setTimeout(() => pageLoader.classList.add('is-hidden'), 1800);
+
+    document.querySelector('.back-button').addEventListener('click', () => {
+      pageLoader.classList.remove('is-hidden');
+    });
+
+    const renderThumbnails = () => {
+      // Duplicate 4× so the loop is long enough to scroll smoothly
+      for (let repeat = 0; repeat < 4; repeat++) {
+        galleryImages.forEach((img, index) => {
+          const thumbnail = document.createElement('div');
+          thumbnail.className = 'thumbnail';
+          if (repeat === 0 && index === currentIndex) thumbnail.classList.add('active');
+
+          const img_el = document.createElement('img');
+          img_el.src = img.image;
+          img_el.alt = img.title;
+
+          thumbnail.appendChild(img_el);
+          thumbnail.addEventListener('click', () => updateMainImage(index));
+          thumbnailsGrid.appendChild(thumbnail);
+        });
+      }
+    };
+
+    renderThumbnails();
+    updateMainImage(currentIndex);
+
+    /* ===== SMOOTH AUTO-SCROLL, centered ===== */
+    let autoScrollInterval;
+    const startAutoScroll = () => {
+      let scrollPos = 0;
+      const totalWidth = thumbnailsGrid.scrollWidth / 4; // divided by 4 because of 4× duplication
+
+      autoScrollInterval = setInterval(() => {
+        scrollPos += 0.3;
+        thumbnailsGrid.scrollLeft = scrollPos % totalWidth;
+
+        if (scrollPos >= totalWidth) {
+          scrollPos = 0;
+        }
+      }, 30);
+    };
+
+    const stopAutoScroll = () => {
+      clearInterval(autoScrollInterval);
+    };
+
+    setTimeout(() => startAutoScroll(), 1500);
+
+    thumbnailsGrid.addEventListener('mouseenter', stopAutoScroll);
+    thumbnailsGrid.addEventListener('mouseleave', () => setTimeout(() => startAutoScroll(), 2000));
+    thumbnailsGrid.addEventListener('click', stopAutoScroll);
+    thumbnailsGrid.addEventListener('touchstart', stopAutoScroll);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') {
+        stopAutoScroll();
+        updateMainImage((currentIndex - 1 + galleryImages.length) % galleryImages.length);
+      } else if (e.key === 'ArrowRight') {
+        stopAutoScroll();
+        updateMainImage((currentIndex + 1) % galleryImages.length);
+      }
+    });
+  </script>
+</body>
+</html>

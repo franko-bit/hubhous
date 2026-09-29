@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>House Photography | HubHome</title>
+  <style>
+    :root { --ink: #161616; --paper: #eee9e1; --muted: #bdb5aa; --gold: #d6a56d; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--ink); color: #f7f4ef; font-family: 'Segoe UI', system-ui, sans-serif; }
+    a { color: inherit; }
+    .topbar { position: absolute; inset: 0 0 auto; z-index: 2; display: flex; justify-content: space-between; align-items: center; padding: 1.5rem clamp(1.25rem, 4vw, 4rem); }
+    .brand { font-size: 14px; letter-spacing: .2em; text-decoration: none; }
+    .back { color: rgba(255,255,255,.78); font-size: 12px; letter-spacing: .12em; text-decoration: none; text-transform: uppercase; }
+    .hero { min-height: 82vh; display: grid; align-items: end; position: relative; overflow: hidden; padding: clamp(7rem, 16vw, 12rem) clamp(1.25rem, 7vw, 7rem) clamp(4rem, 9vw, 7rem); background: #101010; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,.7), rgba(0,0,0,.12)), url('https://res.cloudinary.com/dzgd4r0oz/image/upload/v1789454840/hubhom/DSC01343_srjilo.jpg') center/cover; transform: scale(1.02); }
+    .hero-copy { position: relative; max-width: 760px; }
+    .eyebrow { color: #f0d0a7; font-size: 11px; letter-spacing: .22em; text-transform: uppercase; }
+    h1 { margin: .9rem 0 1.25rem; font-size: clamp(3rem, 8vw, 7.5rem); font-weight: 300; letter-spacing: .01em; line-height: .95; }
+    .hero p { max-width: 560px; color: rgba(255,255,255,.78); font-size: 1.1rem; line-height: 1.65; }
+    .content { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 7vw, 8rem); max-width: 1200px; margin: auto; padding: clamp(4rem, 10vw, 9rem) clamp(1.25rem, 5vw, 4rem); }
+    .content h2 { margin: 0 0 1rem; color: var(--paper); font-size: clamp(2rem, 4vw, 4rem); font-weight: 300; line-height: 1; }
+    .content p { color: var(--muted); line-height: 1.8; }
+    .list { display: grid; gap: 1rem; margin: 1.5rem 0 0; padding: 0; list-style: none; }
+    .list li { padding: 1rem 0; border-top: 1px solid rgba(255,255,255,.16); color: #e8e1d8; }
+    .examples { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 0 clamp(1.25rem, 5vw, 4rem) clamp(5rem, 10vw, 9rem); max-width: 1400px; margin: auto; }
+    .examples img { display: block; width: 100%; aspect-ratio: 1 / 1.15; object-fit: cover; }
+    .cta { border-top: 1px solid rgba(255,255,255,.12); padding: 2rem clamp(1.25rem, 5vw, 4rem); display: flex; justify-content: space-between; gap: 1rem; align-items: center; color: var(--muted); }
+    .cta a { color: var(--gold); text-decoration: none; text-transform: uppercase; letter-spacing: .12em; font-size: 12px; }
+    @media (max-width: 720px) { .content, .examples { grid-template-columns: 1fr; } .examples img { aspect-ratio: 16 / 10; } .cta { align-items: flex-start; flex-direction: column; } }
+  </style>
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="index.html">HUBHOME</a><a class="back" href="index.html">Back to home</a></header>
+  <main>
+    <section class="hero"><div class="hero-copy"><div class="eyebrow">House Photography</div><h1>Make the space impossible to overlook.</h1><p>Bright, balanced property photography that gives buyers and renters an honest, compelling feel for the home before they arrive.</p></div></section>
+    <section class="content">
+      <div><div class="eyebrow">What we capture</div><h2>Rooms with clarity. Details with intention.</h2><p>We photograph the architecture, flow, light, and character that make a property worth visiting. Every image is edited for consistency across listing sites, print, and social media.</p></div>
+      <div><div class="eyebrow">Included</div><ul class="list"><li>Interior and exterior coverage</li><li>Natural-light and detail images</li><li>Professional listing-ready editing</li><li>Homes, apartments, rentals, and commercial spaces</li></ul></div>
+    </section>
+    <section class="examples" aria-label="House photography examples"><img src="https://res.cloudinary.com/dzgd4r0oz/image/upload/v1789454839/hubhom/DSC01355_ep7v4c.jpg" alt="Bright living room photographed for a property listing"><img src="https://res.cloudinary.com/dzgd4r0oz/image/upload/v1789454835/hubhom/QUICK_photo_11_m6kshf.jpg" alt="Modern kitchen photographed for a property listing"><img src="https://res.cloudinary.com/dzgd4r0oz/image/upload/v1789454828/hubhom/QUICK_photo_24_fxf2ra.jpg" alt="Interior detail photographed for a property listing"></section>
+  </main>
+  <footer class="cta"><span>Ready to show the home at its best?</span><a href="contact.html">Start a conversation</a></footer>
+</body>
+</html>

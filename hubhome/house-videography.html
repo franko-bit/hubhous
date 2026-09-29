@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>House Videography | HubHome</title>
+  <style>
+    :root { --ink: #111; --muted: #bdb5aa; --gold: #d6a56d; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--ink); color: #f7f4ef; font-family: 'Segoe UI', system-ui, sans-serif; }
+    a { color: inherit; }
+    .topbar { position: absolute; inset: 0 0 auto; z-index: 3; display: flex; justify-content: space-between; padding: 1.5rem clamp(1.25rem, 4vw, 4rem); }
+    .brand, .back { text-decoration: none; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; }
+    .back { color: rgba(255,255,255,.78); }
+    .hero { min-height: 82vh; position: relative; display: grid; align-items: end; overflow: hidden; padding: clamp(7rem, 16vw, 12rem) clamp(1.25rem, 7vw, 7rem) clamp(4rem, 9vw, 7rem); }
+    .hero video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.48) saturate(1.05); }
+    .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,.72), rgba(0,0,0,.1)); }
+    .hero-copy { position: relative; z-index: 1; max-width: 780px; }
+    .eyebrow { color: #f0d0a7; font-size: 11px; letter-spacing: .22em; text-transform: uppercase; }
+    h1 { margin: .9rem 0 1.25rem; font-size: clamp(3rem, 8vw, 7.5rem); font-weight: 300; line-height: .95; }
+    .hero p { max-width: 580px; color: rgba(255,255,255,.78); font-size: 1.1rem; line-height: 1.65; }
+    .content { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 7vw, 8rem); max-width: 1200px; margin: auto; padding: clamp(4rem, 10vw, 9rem) clamp(1.25rem, 5vw, 4rem); }
+    .content h2 { margin: 0 0 1rem; font-size: clamp(2rem, 4vw, 4rem); font-weight: 300; line-height: 1; }
+    .content p { color: var(--muted); line-height: 1.8; }
+    .list { display: grid; gap: 1rem; margin: 1.5rem 0 0; padding: 0; list-style: none; }
+    .list li { padding: 1rem 0; border-top: 1px solid rgba(255,255,255,.16); color: #e8e1d8; }
+    .feature-video { max-width: 1200px; margin: 0 auto; padding: 0 clamp(1.25rem, 5vw, 4rem) clamp(5rem, 10vw, 9rem); }
+    .feature-video video { display: block; width: 100%; max-height: 720px; object-fit: cover; background: #000; }
+    .caption { margin-top: 1rem; color: var(--muted); font-size: .9rem; }
+    .cta { border-top: 1px solid rgba(255,255,255,.12); padding: 2rem clamp(1.25rem, 5vw, 4rem); display: flex; justify-content: space-between; gap: 1rem; color: var(--muted); }
+    .cta a { color: var(--gold); text-decoration: none; text-transform: uppercase; letter-spacing: .12em; font-size: 12px; }
+    @media (max-width: 720px) { .content { grid-template-columns: 1fr; } .cta { align-items: flex-start; flex-direction: column; } }
+  </style>
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="index.html">HUBHOME</a><a class="back" href="index.html">Back to home</a></header>
+  <main>
+    <section class="hero"><video autoplay muted loop playsinline poster="https://res.cloudinary.com/dzgd4r0oz/image/upload/v1789454840/hubhom/DSC01343_srjilo.jpg"><source src="https://res.cloudinary.com/franklinrw/video/upload/v1788944552/short_denpzx.mp4" type="video/mp4"></video><div class="hero-copy"><div class="eyebrow">House Videography</div><h1>Let the property tell its story.</h1><p>Short, atmospheric walkthroughs that show movement, scale, light, and the feeling of arriving home.</p></div></section>
+    <section class="content">
+      <div><div class="eyebrow">What we create</div><h2>Motion that gives a listing context.</h2><p>We shape a concise visual journey through the property, made for listing pages, social feeds, and the first impression that earns a viewing.</p></div>
+      <div><div class="eyebrow">Included</div><ul class="list"><li>Guided interior and exterior walkthroughs</li><li>Vertical social-ready cuts</li><li>Natural transitions and considered pacing</li><li>Photo and video packages for complete coverage</li></ul></div>
+    </section>
+    <section class="feature-video"><video controls playsinline poster="https://res.cloudinary.com/dzgd4r0oz/image/upload/v1789454840/hubhom/DSC01343_srjilo.jpg"><source src="https://res.cloudinary.com/franklinrw/video/upload/v1788944552/short_denpzx.mp4" type="video/mp4"></video><p class="caption">Example property walkthrough. Press play to explore the pace and atmosphere of a HubHome house video.</p></section>
+  </main>
+  <footer class="cta"><span>Give your next listing a sense of place.</span><a href="contact.html">Start a conversation</a></footer>
+</body>
+</html>

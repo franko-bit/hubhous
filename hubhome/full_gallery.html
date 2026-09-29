@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inspirations | HubHome</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    :root {
+      --page: #f5f0ea;
+      --text: #161616;
+      --muted: #716d65;
+      --fine: #d9b184;
+      --cream: #f9f7f3;
+      --line: rgba(38, 38, 38, 0.18);
+      --shadow: rgba(0, 0, 0, 0.12);
+    }
+
+    body {
+      margin: 0;
+      background: var(--page);
+      color: var(--text);
+      font-family: "Segoe UI", Arial, sans-serif;
+      min-height: 100vh;
+    }
+
+    .inspiration-page {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 56px 42px 80px;
+      background: var(--page);
+    }
+
+    .page-title {
+      margin: 0 0 32px;
+      font-size: clamp(4rem, 4vw, 3.8rem);
+      line-height: 1.1;
+      font-weight: 400;
+      letter-spacing: -0.04em;
+      color: var(--text);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(150px, 1fr));
+      gap: 16px;
+      align-items: stretch;
+      min-height: 440px;
+      margin-top: 8px;
+    }
+
+    .tile {
+      position: relative;
+      overflow: hidden;
+      background: #eae7df;
+      border-radius: 4px;
+      box-shadow: 0 2px 10px var(--shadow);
+      min-height: 160px;
+      height: 180px;
+      transition: transform 300ms ease, box-shadow 300ms ease;
+    }
+
+    .tile:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px var(--shadow);
+    }
+
+    .tile img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .tile.tall {
+      height: 310px;
+      min-height: 310px;
+    }
+
+    .tile.mid {
+      height: 240px;
+      min-height: 240px;
+    }
+
+    .tile.wide {
+      height: 210px;
+      min-height: 210px;
+    }
+
+    .tile.tiny {
+      height: 150px;
+      min-height: 150px;
+    }
+
+    @media (max-width: 960px) {
+      .gallery-grid {
+        grid-template-columns: repeat(2, minmax(160px, 1fr));
+      }
+    }
+
+    @media (max-width: 680px) {
+      .inspiration-page {
+        padding: 24px 16px 40px;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="inspiration-page">
+    <h1 class="page-title">Inspirations</h1>
+
+    <section class="gallery-grid">
+      <article class="tile tall">
+        <img src="https://res.cloudinary.com/dzgd4r0oz/image/upload/w_900,q_auto,f_auto/v1789454840/hubhom/DSC01343_srjilo.jpg" alt="" />
+      </article>
+      <article class="tile tall">
+        <img src="https://res.cloudinary.com/dzgd4r0oz/image/upload/w_900,q_auto,f_auto/v1789454835/hubhom/QUICK_photo_11_m6kshf.jpg" alt="" />
+      </article>
+      <article class="tile wide">
+        <img src="https://res.cloudinary.com/dzgd4r0oz/image/upload/w_900,q_auto,f_auto/v1789454839/hubhom/DSC01355_ep7v4c.jpg" alt="" />
+      </article>
+      <article class="tile">
+        <img src="https://res.cloudinary.com/dzgd4r0oz/image/upload/w_900,q_auto,f_auto/v1789454828/hubhom/QUICK_photo_24_fxf2ra.jpg" alt="" />
+      </article>
+      <article class="tile mid">
+        <img src="https://res.cloudinary.com/dzgd4r0oz/image/upload/w_900,q_auto,f_auto/v1789454735/hubhom/4_tb03dp.jpg" alt="" />
+      </article>
+
+      <article class="tile">
+        <img src="https://res.cloudinary.com/dzgd4r0oz/image/upload/w_900,q_auto,f_auto/v1789454625/hubhom/quick_photo3_t0bhyo.jpg" alt="" />
+      </article>
+      <article class="tile wide">
+        <img src="https://res.cloudinary.com/dzgd4r0oz/image/upload/w_900,q_auto,f_auto/v1789454733/hubhom/4-11_drxfzk.jpg" alt="" />
+      </article>
+      <article class="tile">
+        <img src="https://res.cloudinary.com/dzgd4r0oz/image/upload/w_900,q_auto,f_auto/v1789454721/hubhom/hubdivin__1_y8zqcd.jpg" alt="" />
+      </article>
+      <article class="tile tall">
+        <img src="https://res.cloudinary.com/dzgd4r0oz/image/upload/w_900,q_auto,f_auto/v1789454705/hubhom/DSC02568NIGHT_uerrmh.jpg" alt="" />
+      </article>
+      <article class="tile">
+        <img src="https://res.cloudinary.com/dzgd4r0oz/image/upload/w_900,q_auto,f_auto/v1789454593/hubhom/QUICK_photo_27_xgmn5n.jpg" alt="" />
+      </article>
+
+      <article class="tile">
+        <img src="https://res.cloudinary.com/dzgd4r0oz/image/upload/w_900,q_auto,f_auto/v1789454033/hubhom/quick_photo_34_d2b56r.jpg" alt="" />
+      </article>
+      <article class="tile wide">
+        <img src="https://res.cloudinary.com/dzgd4r0oz/image/upload/w_900,q_auto,f_auto/v1789454026/hubhom/quick_photo_3_dtbbi7.jpg" alt="" />
+      </article>
+      <article class="tile mid">
+        <img src="https://res.cloudinary.com/dzgd4r0oz/image/upload/w_900,q_auto,f_auto/v1789453438/hubhom/quick_photo_12_kd85dr.jpg" alt="" />
+      </article>
+      <article class="tile">
+        <img src="https://res.cloudinary.com/dzgd4r0oz/image/upload/w_900,q_auto,f_auto/v1789453438/hubhom/quick_photo_gwj5fg.jpg" alt="" />
+      </article>
+      <article class="tile">
+        <img src="https://res.cloudinary.com/dzgd4r0oz/image/upload/w_900,q_auto,f_auto/v1789453433/hubhom/quick_photo_15_gioiuv.jpg" alt="" />
+      </article>
+
+      <article class="tile mid">
+        <img src="https://res.cloudinary.com/dzgd4r0oz/image/upload/w_900,q_auto,f_auto/v1789454555/hubhom/othrs/ChatGPT_Image_Sep_22_2025_05_13_25_PM_sz5oce.png" alt="" />
+      </article>
+      <article class="tile tall">
+        <img src="https://res.cloudinary.com/dzgd4r0oz/image/upload/w_900,q_auto,f_auto/v1789454503/hubhom/othrs/DSC00819-HDR_ks4tji.jpg" alt="" />
+      </article>
+      <article class="tile">
+        <img src="https://res.cloudinary.com/dzgd4r0oz/image/upload/w_900,q_auto,f_auto/v1789453858/hubhom/othrs/quick_photo_3_g5jegq.jpg" alt="" />
+      </article>
+      <article class="tile wide">
+        <img src="https://res.cloudinary.com/dzgd4r0oz/image/upload/w_900,q_auto,f_auto/v1789453869/hubhom/othrs/quick_photo_4_nflxa7.jpg" alt="" />
+      </article>
+      <article class="tile">
+        <img src="https://res.cloudinary.com/dzgd4r0oz/image/upload/w_900,q_auto,f_auto/v1789454436/hubhom/othrs/quick_photo_3_nrbzya.jpg" alt="" />
+      </article>
+    </section>
+  </div>
+</body>
+</html>
