@@ -5,8 +5,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-const serverDirectory = path.dirname(fileURLToPath(import.meta.url));
-const workspaceRoot = path.dirname(serverDirectory);
+const workspaceRoot = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 const PORT = Number(process.env.HUBHOME_PORT || process.env.PORT || 3002);
 const envPath = path.join(workspaceRoot, '.env');
@@ -81,9 +80,8 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(workspaceRoot, { index: false }));
 
-app.get('/', (req, res) => res.redirect('/hubhome/index.html'));
-app.get(['/index.html', '/hubindx.html', '/hubhome/hubindx.html'], (req, res) => res.redirect('/hubhome/index.html'));
-app.get('/contact.html', (req, res) => res.redirect('/hubhome/contact.html'));
+app.get('/', (req, res) => res.sendFile(path.join(workspaceRoot, 'index.html')));
+app.get(['/hubindx.html', '/hubhome/index.html', '/hubhome/hubindx.html'], (req, res) => res.redirect('/index.html'));
 
 app.get('/api/hubhome/health', (req, res) => {
   res.json({ status: 'ok', aiConfigured: Boolean(API_KEY), mode: USE_FALLBACK ? 'fallback' : 'live', port: PORT });
@@ -160,6 +158,6 @@ app.post(['/api/hubhome/chat', '/api/chat'], async (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`HUBHOME server2 running at http://localhost:${PORT}`);
-  console.log(`Page: http://localhost:${PORT}/hubhome/index.html`);
+  console.log(`Page: http://localhost:${PORT}/index.html`);
   console.log(`AI: ${API_KEY ? 'configured' : 'not configured'}; mode: ${USE_FALLBACK ? 'fallback' : 'live'}`);
 });
