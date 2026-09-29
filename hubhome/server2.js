@@ -82,7 +82,8 @@ app.use(express.json());
 app.use(express.static(workspaceRoot, { index: false }));
 
 app.get('/', (req, res) => res.redirect('/hubhome/index.html'));
-app.get(['/hubindx.html', '/hubhome/hubindx.html'], (req, res) => res.redirect('/hubhome/index.html'));
+app.get(['/index.html', '/hubindx.html', '/hubhome/hubindx.html'], (req, res) => res.redirect('/hubhome/index.html'));
+app.get('/contact.html', (req, res) => res.redirect('/hubhome/contact.html'));
 
 app.get('/api/hubhome/health', (req, res) => {
   res.json({ status: 'ok', aiConfigured: Boolean(API_KEY), mode: USE_FALLBACK ? 'fallback' : 'live', port: PORT });
